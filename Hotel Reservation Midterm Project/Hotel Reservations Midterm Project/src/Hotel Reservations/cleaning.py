@@ -3,7 +3,9 @@ def cleaning_method(df):
     #Update columns to the right dtype (reservation_status_date to datetime and is_canceled to bool)
     df['reservation_status_date'] = pd.to_datetime(df['reservation_status_date'])
     #df['reservation_status_date'] = df['reservation_status_date'].astype('datetime')
-    df['is_canceled'] = df['is_canceled'].astype(bool)
+    # Fill missing values with a default value (e.g., False) before converting to bool
+    df['is_canceled'] = df['is_canceled'].astype('bool')
+
 
     #In a new column named 'arrival_date', connect the year, month and day of month to one neat datetime - you will need to convert the columns
     #to strings first
