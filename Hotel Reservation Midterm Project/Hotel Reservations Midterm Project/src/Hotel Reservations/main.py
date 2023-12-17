@@ -5,7 +5,7 @@ import database_actions
 
 def main():
     # path for csv 
-    file_path = 'hotel_bookings.csv'
+    file_path = 'Hotel Reservation Midterm Project\Hotel Reservations Midterm Project\src\Hotel Reservations\hotel_bookings.csv'
     na_values = ['undefined',  'none']
     # Read the CSV file into a DataFrame
     df = pd.read_csv(file_path, na_values= na_values)

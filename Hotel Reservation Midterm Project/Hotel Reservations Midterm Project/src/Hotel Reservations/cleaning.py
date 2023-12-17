@@ -15,8 +15,11 @@ def cleaning_method(df):
     nan_cols = df.columns[df.isna().any()].tolist()
     thresh = 0.7 * len(df)
     df = df.dropna(thresh=thresh, axis=1)
-    nume_cols = df.select_dtypes(include=['number']).columns
+    num_cols = df.select_dtypes(include=['number']).columns
     string_cols = df.select_dtypes(include=['object']).columns
-    df[num_cols] = df[num_cols].fillna(df[nume_cols].mean().round())
-    df[string_cols] = df[string_cols].fillna(method='ffill')
+    df_copy = df.copy()
+    df_copy[num_cols] = df_copy[num_cols].fillna(df[num_cols].mean().round())
+    df_copy[string_cols] = df_copy[string_cols].fillna(method='ffill')
+
+
 
