@@ -1,4 +1,35 @@
 class Reservation:
     def __init__(self, data_row):
         self.data_row = data_row
-        
+        self.hotel=data_row["hotel"]
+        self.is_canceled=data_row["is_canceled"]
+        self.lead_time=data_row["leadd_time"]
+        self.arrival_date_year=data_row["arrival_date_year"]
+        self.arrival_date_month=data_row["arrival_date_month"]
+        self.arrival_date_week_number=data_row["arrival_date_week_number"]
+        self.arrival_date_day_of_month=data_row["arrival_date_day_of_month"]
+        self.stays_in_weekend_nights=data_row["stays_in_weekend_nights"]
+        self.stays_in_week_nights=data_row["stays_in_week_nights"]
+        self.meal=data_row["meal"]
+        self.market_segment=data_row["market_segment"]
+        self.distribution_channel=data_row["distribution_channel"]
+        self.is_repeated_guest=data_row["is_repeated_guest"]
+        self.previous_cancellations=data_row["previous_cancellations"]
+        self.previous_bookings_not_canceled=data_row["previous_bookings_not_canceled"]
+        self.reserved_room_type=data_row["reserved_room_type"]
+        self.assigned_room_type=data_row["assigned_room_type"]
+        self.booking_changes=data_row["booking_changes"]
+        self.deposit_type=data_row["deposit_type"]
+        self.agent=data_row["agent"]
+        self.company=data_row["company"]
+        self.days_in_waiting_list=data_row["days_in_waiting_list"]
+        self.customer_type=data_row["customer_type"]
+        self.adr=data_row["adr"]
+        self.required_car_parking_spaces=data_row["required_car_parking_spaces"]
+        self.total_of_special_requests=data_row["total_of_special_requests"]
+        self.reservation_status=data_row["reservation_status"]
+        self.reservation_status_date=data_row["reservation_status_date"]
+        self.arrival_date=data_row["arrival_date"]
+        self.direct_booking=data_row["direct_booking"]
+
+
