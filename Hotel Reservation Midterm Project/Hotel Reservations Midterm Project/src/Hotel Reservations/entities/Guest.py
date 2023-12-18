@@ -5,6 +5,11 @@ class Guest:
         self.children= data_row["children"]
         self.babies=data_row["babies"]
         self.country=data_row["country"]
+
+    def __str__(self):
+        return f"Number of adults={self.adults}, Number of children={self.children}, Number of babies={self.babies}, Country={self.country}"
+    
+ 
    
    
 
