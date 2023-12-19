@@ -1,0 +1,30 @@
+WITH AgentBookings AS (
+    SELECT TOP 1 agent, COUNT(R.ReservationId) AS total_bookings
+    FROM Reservation R WITH(NOLOCK)
+    WHERE R.country = 'ESP' 
+    GROUP BY R.agent
+    ORDER BY total_bookings DESC
+)
+
+SELECT TOP 10 G.*
+FROM Reservation R WITH(NOLOCK)
+JOIN Guest G WITH(NOLOCK) ON R.GuestId = G.GuestId
+JOIN AgentBookings AB ON R.agent = AB.agent
+ORDER BY R.ReservationId
+
+SELECT R.*, G.*
+FROM dbo.Reservation R WITH(NOLOCK)
+JOIN dbo.Guest G WITH(NOLOCK) ON R.GuestId = G.GuestId
+WHERE R.arrival_date_year = 2015
+AND R.adr BETWEEN 5 AND 100
+AND R.is_canceled = 'False'
+
+SELECT
+    G.children,
+    AVG(R.stays_in_week_nights + R.stays_in_weekend_nights) AS AvgNights
+FROM
+    dbo.Guest G WITH(NOLOCK) 
+JOIN
+     dbo.Reservation R WITH(NOLOCK) ON G.GuestId=R.GuestId
+GROUP BY
+    G.children;

@@ -3,12 +3,18 @@ from sql.database_connect import DbCon
 import sqlalchemy
 
 def create_tables_from_df(df_reservations):
+    print('ssssssssssssssssssssssssssssssssssssssssssssss')
     db = DbCon()
     db.Connect()
+    print('sssssssssss')
     if not sqlalchemy.inspect(db.m_engine).has_table("Guest"):
         df_guests = split_df_reservations(df_reservations)
+        print('ssss')
         db.insert_df(df_guests, "Guest")
+        print("aaa")
         db.insert_df(df_reservations, "Reservation")
+        print("bbb")
+
     
 def split_df_reservations(df_reservations):
     df_reservations.insert(0, 'ReservationId', range(0, 0 + len(df_reservations)))
