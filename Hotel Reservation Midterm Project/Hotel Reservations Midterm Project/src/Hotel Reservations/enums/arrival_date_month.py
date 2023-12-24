@@ -1,5 +1,7 @@
 import pandas as pd
 from enum import Enum, auto
+
+#create an enum for the month 
 class month(Enum):
     JAN=auto()
     FEB=auto()

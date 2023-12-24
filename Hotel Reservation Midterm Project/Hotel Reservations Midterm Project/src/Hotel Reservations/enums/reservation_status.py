@@ -1,6 +1,7 @@
 import pandas as pd
 from enum import Enum, auto
 
+#create an enum for the reservation_status
 class reservation_status(Enum):
     CHECK_OUT= auto()
     CANCLED= auto()

@@ -1,7 +1,10 @@
 from enums import hotel, reservation_status, deposit_type, arrival_date_month
-import Guest
+from entities import Guest
 class Reservation:
     def __init__(self, data_row, hotel, reservation_status, deposit_type, arrival_date_month):
+        """
+        constructor for the Reservation class
+        """
         self.data_row = data_row
         self.hotel=self.convert_enum(hotel, hotel)
         self.is_canceled=data_row["is_canceled"]
