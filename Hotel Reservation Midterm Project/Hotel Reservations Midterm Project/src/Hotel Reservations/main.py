@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
-import cleaning
+from data_analysis import cleaning
 from sql import database_actions, queries
 import logging.config
 
-logging.config.fileConfig('logging_config.ini')
-logger = logging.getLogger('sampleLogger')
+
 
 def main():
     """
@@ -98,6 +97,8 @@ def setup():
     na_values(str array): array of words that should be defined as nan
     df(dataframe): the dataframe that is created
     """
+    logging.config.fileConfig('logging_config.ini')
+    logger = logging.getLogger('sampleLogger')
     # path for csv 
     file_path = 'Hotel Reservation Midterm Project\Hotel Reservations Midterm Project\src\Hotel Reservations\hotel_bookings.csv'       
     # Read the CSV file into a DataFrame
