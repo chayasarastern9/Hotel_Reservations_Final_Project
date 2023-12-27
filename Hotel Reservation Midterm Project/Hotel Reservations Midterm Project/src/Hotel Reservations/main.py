@@ -36,11 +36,13 @@ def main():
         it asks the user to enter a country and asigns the input to a variale and then calls another function to create the output
         variables:
         country_str(str): the country inputted by the user 
-        response(str): the query string that will be outputted
+        response_objects(list): the list of reservation objects returned
+        response(str): the query information output
         """
         country_str=input("Please enter a country: ")
-        response_str=queries.get_top_agents_reservations_in_country(country_str)
-        print(response_str)
+        response_objects=queries.get_top_agents_reservations_in_country(country_str)
+        for response in response_objects:
+            print(response)
         
 
     def option2():
@@ -51,19 +53,28 @@ def main():
         year_int(int): year inputted
         bottom_int(int): bottom of range inputted 
         top_int(int): top of range inputted
+        response_objects(list): the list of reservation objects returned
+        response(str): the query information output
         """
         year_int=input("Please enter a year: ")
         bottom_int= input("Please enter the bottom of your price range: ")
         top_int= input("Please enter the top of your price range: ")
-        queries.get_reservation_year_adr(year_int, bottom_int, top_int)
+        response_objects=queries.get_reservation_year_adr(year_int, bottom_int, top_int)
+        for response in response_objects:
+            print(response)
 
     def option3():
         """
         when the user chooses option 3 this function is called
         prints a query showing if the numper of children impacts the number of nights
+        Variables:
+        response_objects(list): the list of reservation objects returned
+        response(str): the query information output
         """
         print("Now we will see if the number of children impacts the number of nights:")
-        queries.get_connection_children_nights()
+        response_objects=queries.get_connection_children_nights()
+        for response in response_objects:
+            print(response)
     
     def option4():
         """
@@ -71,9 +82,13 @@ def main():
         This function asks the user to enter the countryy he is from and then it asigns the input to a variable and then calls another function to create the output
         variable:
         country_str(str): country that the user inputs
+        response_objects(list): the list of reservation objects returned
+        response(str): the query information output
         """
         country_str=input("Please enter the country you come from: ")
-        queries.get_count_country(country_str)
+        response_objects=queries.get_count_country(country_str)
+        for response in response_objects:
+            print(response)
 
     while True:
         display_menu()

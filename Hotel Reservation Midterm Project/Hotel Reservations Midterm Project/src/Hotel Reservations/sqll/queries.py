@@ -12,11 +12,9 @@ def get_top_agents_reservations_in_country(country):
     sql_query_str(str): turns the sql query into a string literal 
     df_results(data frame): the query is turned into a dataframe 
     reservation_objects( reservation array): an array of reservation objrcys is created
-    guest_objects(guest array): an array of guest objects is created
 
     return:
     reservation_objects 
-    guest_objects  
     """
     sql_query_str = """ WITH AgentBookings AS (
     SELECT TOP 1 agent, COUNT(R.ReservationId) AS total_bookings, G.country
@@ -35,12 +33,20 @@ def get_top_agents_reservations_in_country(country):
     ORDER BY R.ReservationId """
     df_results=database_actions.query(sql_query_str)
     def create_reservation_objects(df):
+        """
+        Parameter:
+        df(data frame): the dataframe that was created by the query
+
+        Return:
+        reservation_objects: array of reservation objects
+        """
         reservation_objects = []
         for index, row in df.iterrows():
             reservation = Reservation(row)
             reservation_objects.append(reservation)
         return reservation_objects
     reservation_objects = create_reservation_objects(df_results) 
+    return reservation_objects
  
 
 def get_reservation_year_adr(year, bottom, top):
@@ -53,6 +59,11 @@ def get_reservation_year_adr(year, bottom, top):
 
     variables:
     sql_query_str(str): turn the sql query into a string literal 
+    df_results(data frame): the query is turned into a dataframe 
+    reservation_objects( reservation array): an array of reservation objrcys is created
+
+    return:
+    reservation_objects 
     """
     sql_query_str="""SELECT R.*, G.*
     FROM dbo.Reservation R WITH(NOLOCK)
@@ -60,8 +71,22 @@ def get_reservation_year_adr(year, bottom, top):
     WHERE R.arrival_date_year = """+year+""""
     AND R.adr BETWEEN """+bottom+""" AND"""+ top+"""
     AND R.is_canceled = 0"""
-    database_actions.query(sql_query_str)
+    df_results=database_actions.query(sql_query_str)
+    def create_reservation_objects(df):
+        """
+        Parameter:
+        df(data frame): the dataframe that was created by the query
 
+        Return:
+        reservation_objects: array of reservation objects
+        """
+        reservation_objects = []
+        for index, row in df.iterrows():
+            reservation = Reservation(row)
+            reservation_objects.append(reservation)
+        return reservation_objects
+    reservation_objects = create_reservation_objects(df_results) 
+    return reservation_objects
     
 
 def get_connection_children_nights():
@@ -70,12 +95,32 @@ def get_connection_children_nights():
 
     Variales:
     sql_query(str): turn the sql query into a string literal
+    df_results(data frame): the query is turned into a dataframe 
+    reservation_objects( reservation array): an array of reservation objrcys is created
+
+    return:
+    reservation_objects 
     """
     sql_query_str="""SELECT G.children, AVG(R.stays_in_week_nights + R.stays_in_weekend_nights) AS AvgNights
     FROM dbo.Guest G WITH(NOLOCK) 
     JOIN dbo.Reservation R WITH(NOLOCK) ON G.GuestId=R.GuestId
     GROUP BY G.children, R.stays_in_week_nights, R.stays_in_weekend_nights;"""
-    database_actions.query(sql_query_str)
+    df_results=database_actions.query(sql_query_str)
+    def create_reservation_objects(df):
+        """
+        Parameter:
+        df(data frame): the dataframe that was created by the query
+
+        Return:
+        reservation_objects: array of reservation objects
+        """
+        reservation_objects = []
+        for index, row in df.iterrows():
+            reservation = Reservation(row)
+            reservation_objects.append(reservation)
+        return reservation_objects
+    reservation_objects = create_reservation_objects(df_results) 
+    return reservation_objects
 
 def get_count_country(country):
     """
@@ -86,9 +131,29 @@ def get_count_country(country):
 
     Variables:
     sql_query(str): turn the sql query into a string literal
+    df_results(data frame): the query is turned into a dataframe 
+    reservation_objects( reservation array): an array of reservation objrcys is created
+
+    return:
+    reservation_objects 
     """
     sql_query_str="""SELECT COUNT(G.Guestid), G.country
     FROM dbo.Guest G WITH(NOLOCK)
     WHERE G.country="""+'country'+"""
     GROUP BY G.country"""
-    database_actions.query(sql_query_str)
+    df_results=database_actions.query(sql_query_str)
+    def create_reservation_objects(df):
+        """
+        Parameter:
+        df(data frame): the dataframe that was created by the query
+
+        Return:
+        reservation_objects: array of reservation objects
+        """
+        reservation_objects = []
+        for index, row in df.iterrows():
+            reservation = Reservation(row)
+            reservation_objects.append(reservation)
+        return reservation_objects
+    reservation_objects = create_reservation_objects(df_results) 
+    return reservation_objects
