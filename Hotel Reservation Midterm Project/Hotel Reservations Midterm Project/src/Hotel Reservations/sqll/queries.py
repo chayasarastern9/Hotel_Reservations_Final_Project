@@ -34,23 +34,14 @@ def get_top_agents_reservations_in_country(country):
     AND G.country=AB.country
     ORDER BY R.ReservationId """
     df_results=database_actions.query(sql_query_str)
-    reservation_objects = [
-    Reservation(
-        row['ReservationId'],
-        row['GuestId'],
-        row['agent'],)
-    for index, row in df_results.iterrows()
-    ]
-    guest_objects= [
-    Guest(
-        row['GuestId'],
-        row['country'],
-        )
-    for index, row in df_results.iterrows()
-        ]
-    return reservation_objects, guest_objects
-
-
+    def create_reservation_objects(df):
+        reservation_objects = []
+        for index, row in df.iterrows():
+            reservation = Reservation(row)
+            reservation_objects.append(reservation)
+        return reservation_objects
+    reservation_objects = create_reservation_objects(df_results) 
+ 
 
 def get_reservation_year_adr(year, bottom, top):
     """

@@ -2,7 +2,8 @@ import sqlalchemy
 import pandas as pd
 import logging
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine, text
+import configparser
+import os
 
 from sqll import db_info as db_info #this file has the dbinfo:server,db,etc.
 #This class is to connect to the database
