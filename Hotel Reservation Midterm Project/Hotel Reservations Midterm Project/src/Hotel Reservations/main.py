@@ -119,17 +119,25 @@ def setup():
     df(dataframe): the dataframe that is created
     """
    
-    # path for csv 
-    file_path = 'Hotel Reservation Midterm Project\Hotel Reservations Midterm Project\src\Hotel Reservations\hotel_bookings.csv'       
-    # Read the CSV file into a DataFrame
-    na_values=['undefined', 'none']
-    logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
-    logging.warning('The data frame is being created')
-    df = pd.read_csv(file_path, na_values= na_values)
-    logging.warning('The data frame is being cleaned')
-    cleaning.cleaning_method(df)
-    logging.warning('The tables are being created')
-    database_actions.create_tables_from_df(df)
+    try:
+        # Path for CSV
+        file_path = 'Hotel Reservation Midterm Project/Hotel Reservations Midterm Project/src/Hotel Reservations/hotel_bookings.csv'
+        # Read the CSV file into a DataFrame
+        na_values = ['undefined', 'none']
+        logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+        logging.warning('The data frame is being created')
+        df = pd.read_csv(file_path, na_values=na_values)
+        logging.warning('The data frame is being cleaned')
+        cleaning.cleaning_method(df)
+        logging.warning('The tables are being created')
+        database_actions.create_tables_from_df(df)
+    #excetion handling:
+    except FileNotFoundError as e:
+        logging.error(f"The file was not found: {e}")
+    except pd.errors.EmptyDataError:
+        logging.error("The CSV file is empty.")
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
